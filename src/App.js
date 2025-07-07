@@ -8,21 +8,6 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <h1>React App</h1>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/following">Following</Link>
-                        </li>
-                        <li>
-                            <Link to="/upload">Upload</Link>
-                        </li>
-                    </ul>
-                </nav>
-
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         // const Layout = route.layout === null ? Fragment : DefaultLayout;
