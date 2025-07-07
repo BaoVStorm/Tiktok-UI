@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
 :root {
-    --primary: #333;
+    --primary: rgba(254, 44, 85, 1);
+    --black: #000;
+    --text-color: #333;
 
     // Default layout
     --default-layout-header-height: 60px;
@@ -28,4 +30,16 @@ body {
 
     font-size: 1.6rem;
     line-height: 1.5;
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
 }
