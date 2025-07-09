@@ -28,6 +28,19 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -43,6 +56,11 @@ const MENU_ITEMS = [
 function Header() {
     const [searchResult, setSearchResult] = useState([1, 2, 3]);
 
+    // handle MenuChange ()
+    const handleMenuChange = (item) => {
+        // console.log(item);
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -52,7 +70,7 @@ function Header() {
 
                 <Tippy
                     interactive={true} // Cho phép tương tác được
-                    visible={searchResult.length > 0} // Cho phép hiển thị hay không
+                    // visible={searchResult.length > 0} // Cho phép hiển thị hay không
                     render={(attrs) => (
                         // mặc định giúp hiển thị danh sách
                         <div className={cx('search-result')} tabIndex={-1} {...attrs}>
@@ -88,7 +106,7 @@ function Header() {
                         Log in
                     </Button>
 
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>

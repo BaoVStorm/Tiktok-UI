@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0px var(--default-layout-horizontal-spacer);
 }
 
 .logo {
@@ -73,6 +74,10 @@
     top: 50%;
     transform: translateY(-50%);
     color: rgba(22, 24, 35, 0.34);
+
+    display: flex;  
+    justify-content: center;
+    align-items: center;
 }
 
 .search-btn {
@@ -115,5 +120,3 @@
     background-color: transparent;
     cursor: pointer;
 }
-
-
