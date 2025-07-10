@@ -30,6 +30,7 @@ import { logo } from '~/assets/images/index';
 import AccountItem from '~/components/AccountItem';
 import { UploadIcon } from '~/components/icon';
 import Image from '~/components/image';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 
@@ -90,8 +91,6 @@ const USER_MENU_ITEMS = [
 const currentUser = true;
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([1, 2, 3]);
-
     // handle MenuChange ()
     const handleMenuChange = (item) => {
         // console.log(item);
@@ -104,37 +103,7 @@ function Header() {
                     <img src={logo} alt="Tiktok-Logo" />
                 </div>
 
-                <HeadlessTippy
-                    interactive={true} // Cho phép tương tác được
-                    // visible={searchResult.length > 0} // Cho phép hiển thị hay không
-                    render={(attrs) => (
-                        // mặc định giúp hiển thị danh sách
-                        <div className={cx('search-result')} tabIndex={-1} {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                    appendTo={() => document.querySelector('.tippy-wrapper')}
-                >
-                    <div className="tippy-wrapper">
-                        <div className={cx('search')}>
-                            <input placeholder="Search account and videos" spellCheck="false" />
-
-                            <button className={cx('close')}>
-                                <FontAwesomeIcon icon={faCircleXmark} />
-                            </button>
-
-                            <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                            <button className={cx('search-btn')}>
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </button>
-                        </div>
-                    </div>
-                </HeadlessTippy>
+                <Search />
 
                 {
                     <div className={cx('actions')}>
@@ -159,7 +128,7 @@ function Header() {
                             {currentUser ? (
                                 <Image
                                     className={cx('user-avatar')}
-                                    src="https://p16-sign-sg.tiktokcsdn.com/tos-alisg-avt-0068/5c7f92798e3944ca5f28263549d12b27~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=258d647b&x-expires=1752238800&x-signature=EmhtDnQC8NcMXwuvkVZqxik2%2FZg%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
+                                    src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/5c7f92798e3944ca5f28263549d12b27~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=258d647b&x-expires=1752238800&x-signature=EmhtDnQC8NcMXwuvkVZqxik2%2FZg%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
                                     alt="VStorm"
                                     // fallback="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/3dc06a1b77c02469857b4f3c9549579b~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=e11f0d87&x-expires=1752292800&x-signature=YGEXg8ZquomMYVuSwC%2BaMP%2FpVx8%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my"
                                 />
