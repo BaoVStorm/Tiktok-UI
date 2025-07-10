@@ -1,0 +1,28 @@
+import { useState, forwardRef } from 'react';
+import classNames from 'classnames/bind';
+
+import { noImage } from '~/assets/images';
+import styles from './image.module.scss';
+
+const cx = classNames.bind(styles);
+
+const Image = forwardRef(({ src, className, fallback: customFallback = noImage, alt, ...props }, ref) => {
+    const [fallback, setFallback] = useState(src);
+
+    const handleFallback = () => {
+        setFallback(customFallback);
+    };
+
+    return (
+        <img
+            className={cx('wrapper', className)}
+            ref={ref}
+            src={fallback}
+            alt={alt}
+            {...props}
+            onError={handleFallback}
+        />
+    );
+});
+
+export default Image;

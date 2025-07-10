@@ -1,5 +1,29 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+// Font emmbeded
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/TikTokFont-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/TikTokFont-Semibold.woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/fonts/TikTokFont-Bold.woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/fonts/TikTokDisplayFont-Bold.woff2');
+    font-weight: 700;
+}
 
 :root {
     --primary: #fe2c55;
@@ -24,7 +48,7 @@ html {
 }
 
 body {
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: 'ProximaNova', sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 
@@ -40,7 +64,7 @@ input,
     outline: none;
     border: none;
 
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: 'ProximaNova', sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
 }
