@@ -1,13 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import { faCircleXmark, faSpinner, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
+
+import * as request from '~/utils/request';
+import * as searchServices from '~/apiServices/searchServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 
 import styles from './Search.module.scss';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -19,27 +24,77 @@ function Search() {
 
     const inputRef = useRef();
 
+    const debounced = useDebounce(searchValue, 500);
+
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
 
-        const encodeSearch = encodeURIComponent(searchValue);
-
         setLoading(true);
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeSearch}&type=less`)
-            .then((response) => response.json())
-            .then((response) => {
-                // console.log(JSON.stringify(response));
-                setSearchResult(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                // console.log(error);
-                setLoading(false);
-            });
-    }, [searchValue]);
+
+        // ---- way 1: fetch
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //         // console.log(JSON.stringify(response));
+        //         setSearchResult(response.data);
+        //         setLoading(false);
+        //     })
+        //     .catch((error) => {
+        //         // console.log(error);
+        //         setLoading(false);
+        //     });
+
+        // ---- way 2: request
+        // request
+        //     .get(`users/search`, {
+        //         params: {
+        //             q: debounced,
+        //             type: 'less',
+        //         },
+        //     })
+        //     .then((response) => {
+        //         // console.log(response);
+
+        //         setSearchResult(response.data);
+        //         setLoading(false);
+        //     })
+        //     .catch((error) => {
+        //         // console.log(error);
+        //         setLoading(false);
+        //     });
+
+        // ---- way 3: async function
+        // const fetchApi = async () => {
+        //     try {
+        //         const res = await request.get(`users/search`, {
+        //             params: {
+        //                 q: debounced,
+        //                 type: 'less',
+        //             },
+        //         });
+
+        //         setSearchResult(res.data);
+        //         setLoading(false);
+        //     } catch (error) {
+        //         setLoading(false);
+        //     }
+        // };
+        // fetchApi();
+
+        // ---- way 4: import
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const res = await searchServices.search(debounced, 'less');
+            setSearchResult(res);
+
+            setLoading(false);
+        };
+        fetchApi();
+    }, [debounced]);
 
     const handleClose = () => {
         setSearchValue('');
