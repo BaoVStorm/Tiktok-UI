@@ -106,6 +106,14 @@ function Search() {
         setShowResult(false);
     };
 
+    const handleChange = (e) => {
+        const value = e.target.value;
+
+        if (!value.startsWith(' ')) setSearchValue(value);
+    };
+
+    const handleSubmit = () => {};
+
     return (
         <HeadlessTippy
             interactive={true} // Cho phép tương tác được
@@ -131,7 +139,7 @@ function Search() {
                         ref={inputRef}
                         placeholder="Search account and videos"
                         value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={handleChange}
                         spellCheck="false"
                         onFocus={() => setShowResult(true)}
                     />
@@ -144,7 +152,7 @@ function Search() {
 
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                    <button className={cx('search-btn')}>
+                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>

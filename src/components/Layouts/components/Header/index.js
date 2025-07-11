@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // icon fontawesome
 import {
@@ -22,6 +23,7 @@ import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 
+import routesConfig from '~/config/routes';
 import Button from '~/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Menu from '~/components/Popper/Menu';
@@ -99,9 +101,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo')}>
                     <img src={logo} alt="Tiktok-Logo" />
-                </div>
+                </Link>
 
                 <Search />
 
@@ -124,7 +126,7 @@ function Header() {
                             </>
                         )}
 
-                        <Menu items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS} onChange={handleMenuChange}>
+                        <Menu items={currentUser ? USER_MENU_ITEMS : MENU_ITEMS} hideOnClick={false} onChange={handleMenuChange}>
                             {currentUser ? (
                                 <Image
                                     className={cx('user-avatar')}

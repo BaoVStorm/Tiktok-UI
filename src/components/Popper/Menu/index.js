@@ -9,7 +9,7 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, items = [], onChange = () => {} }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = () => {} }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -32,6 +32,7 @@ function Menu({ children, items = [], onChange = () => {} }) {
 
     return (
         <Tippy
+            hideOnClick={hideOnClick}
             interactive // Cho phép tương tác được
             delay={[0, 500]}
             offset={[12, 8]}
