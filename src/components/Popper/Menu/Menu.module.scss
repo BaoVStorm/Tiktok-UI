@@ -12,6 +12,11 @@
     padding-bottom: 8px;
 }
 
+// menu body
+.menu-body {
+    overflow-y: auto;
+}
+
 // menu items
 .menu-item {
     width: 100%;
@@ -37,6 +42,7 @@
     position: relative;
     height: 50px;
     margin-top: -8px;
+    flex-shrink: 0;
 }
 
 .back-btn {

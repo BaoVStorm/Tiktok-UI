@@ -115,25 +115,24 @@ function Search() {
     const handleSubmit = () => {};
 
     return (
-        <HeadlessTippy
-            interactive={true} // Cho phép tương tác được
-            visible={showResult && searchResult.length > 0} // Cho phép hiển thị hay không
-            render={(attrs) => (
-                // mặc định giúp hiển thị danh sách
-                <div className={cx('search-result')} tabIndex={-1} {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
+        <div>
+            <HeadlessTippy
+                interactive={true} // Cho phép tương tác được
+                visible={showResult && searchResult.length > 0} // Cho phép hiển thị hay không
+                render={(attrs) => (
+                    // mặc định giúp hiển thị danh sách
+                    <div className={cx('search-result')} tabIndex={-1} {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
 
-                        {searchResult.map((res) => (
-                            <AccountItem key={res.id} data={res} />
-                        ))}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-            appendTo={() => document.querySelector('.tippy-wrapper')}
-        >
-            <div className="tippy-wrapper">
+                            {searchResult.map((res) => (
+                                <AccountItem key={res.id} data={res} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
+                )}
+                onClickOutside={handleHideResult}
+            >
                 <div className={cx('search')}>
                     <input
                         ref={inputRef}
@@ -156,8 +155,8 @@ function Search() {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>
-            </div>
-        </HeadlessTippy>
+            </HeadlessTippy>
+        </div>
     );
 }
 
