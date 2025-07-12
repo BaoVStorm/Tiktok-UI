@@ -10,7 +10,7 @@ function Button({
     href,
     onClick,
     typeButton,
-    rounded,
+    rounded = false,
     disable = false,
     small = false,
     large = false,
@@ -68,7 +68,18 @@ function Button({
 }
 
 Button.propTypes = {
-    children: PropTypes.node.isRequired,
+    to: PropTypes.string,
+    href: PropTypes.string,
+    typeButton: PropTypes.string,
+    onClick: PropTypes.func,
+    rounded: PropTypes.bool,
+    disable: PropTypes.bool,
+    small: PropTypes.bool,
+    large: PropTypes.bool,
+    iconLeft: PropTypes.node,
+    iconRight: PropTypes.node,
+    className: PropTypes.string,
+    children: PropTypes.node,
 };
 
 export default Button;
