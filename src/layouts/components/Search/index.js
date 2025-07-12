@@ -19,15 +19,16 @@ const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
-    const debounced = useDebounce(searchValue, 500);
+    // useEffect - searchValue
+    const debouncedValue = useDebounce(searchValue, 500);
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
@@ -35,7 +36,7 @@ function Search() {
         setLoading(true);
 
         // ---- way 1: fetch
-        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
+        // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouncedValue)}&type=less`)
         //     .then((response) => response.json())
         //     .then((response) => {
         //         // console.log(JSON.stringify(response));
@@ -51,7 +52,7 @@ function Search() {
         // request
         //     .get(`users/search`, {
         //         params: {
-        //             q: debounced,
+        //             q: debouncedValue,
         //             type: 'less',
         //         },
         //     })
@@ -71,7 +72,7 @@ function Search() {
         //     try {
         //         const res = await request.get(`users/search`, {
         //             params: {
-        //                 q: debounced,
+        //                 q: debouncedValue,
         //                 type: 'less',
         //             },
         //         });
@@ -88,31 +89,32 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const res = await searchServices.search(debounced, 'less');
+            const res = await searchServices.search(debouncedValue, 'less');
             setSearchResult(res);
 
             setLoading(false);
         };
         fetchApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
+    // useEffect | []
     const handleClose = () => {
         setSearchValue('');
         setSearchResult([]);
         inputRef.current.focus();
     };
 
+    // useEffect | []
     const handleHideResult = () => {
         setShowResult(false);
     };
 
+    // useEffect | []
     const handleChange = (e) => {
         const value = e.target.value;
 
         if (!value.startsWith(' ')) setSearchValue(value);
     };
-
-    const handleSubmit = () => {};
 
     return (
         <div>

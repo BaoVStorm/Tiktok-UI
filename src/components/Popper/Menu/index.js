@@ -31,6 +31,29 @@ function Menu({ children, items = [], hideOnClick = false, onChange = () => {} }
         });
     };
 
+    const renderResult = (
+        attrs, // mặc định giúp hiển thị danh sách
+    ) => (
+        <div className={cx('menu-list')} tabIndex={-1} {...attrs}>
+            <PopperWrapper className={cx('menu-popper')}>
+                {history.length > 1 && (
+                    <HeaderMenu
+                        title={current.title}
+                        onBack={() => {
+                            // back page
+                            setHistory((prev) => prev.splice(prev.length - 1, 1));
+                        }}
+                    />
+                )}
+                <div className={cx('menu-body')}>{renderItems()}</div>
+            </PopperWrapper>
+        </div>
+    );
+
+    const handleResetToFirstPage = () => {
+        setHistory((prev) => prev.slice(0, 1));
+    };
+
     return (
         <Tippy
             hideOnClick={hideOnClick}
@@ -38,23 +61,8 @@ function Menu({ children, items = [], hideOnClick = false, onChange = () => {} }
             delay={[0, 500]}
             offset={[12, 8]}
             placement="bottom-end"
-            render={(attrs) => (
-                // mặc định giúp hiển thị danh sách
-                <div className={cx('menu-list')} tabIndex={-1} {...attrs}>
-                    <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && (
-                            <HeaderMenu
-                                title={current.title}
-                                onBack={() => {
-                                    setHistory((prev) => prev.splice(prev.length - 1, 1));
-                                }}
-                            />
-                        )}
-                        <div className={cx('menu-body')}>{renderItems()}</div>
-                    </PopperWrapper>
-                </div>
-            )}
-            onHide={() => setHistory((prev) => prev.slice(0, 1))}
+            render={renderResult}
+            onHide={handleResetToFirstPage}
         >
             {children}
         </Tippy>

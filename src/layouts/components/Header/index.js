@@ -1,35 +1,26 @@
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // icon fontawesome
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
     faSignIn,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
-    faMessage,
     faCoins,
     faUser,
     faGear,
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 
 import config from '~/config';
 import Button from '~/components/Button';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Menu from '~/components/Popper/Menu';
 import styles from './Header.module.scss';
 import { logo } from '~/assets/images/index';
-import AccountItem from '~/components/AccountItem';
 import { UploadIcon } from '~/components/icon';
 import Image from '~/components/image';
 import Search from '../Search';
