@@ -6,8 +6,8 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
 
-import * as request from '~/utils/request';
-import * as searchServices from '~/apiServices/searchServices';
+import * as request from '~/utils/httpRequest';
+import * as searchServices from '~/services/searchServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 
